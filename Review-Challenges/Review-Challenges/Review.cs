@@ -186,24 +186,35 @@ namespace Review_Challenges
         public static void RemoveWord()
         {
             String filePath = "words.txt";
-            string word = "Third";
-            String[] fileContent = File.ReadAllLines(filePath);
-
-            string[] lineSplit = fileContent[2].Split(" ");
-            int position = fileContent[2].IndexOf(word);
-            if (position > -1)
+            string[] myText = File.ReadAllLines(filePath);
+            // If I have one word or less, it will be empty.
+            if (myText.Length == 1 && myText[0] == "Osama")
             {
-                for (int i = position; i < lineSplit.Length - 1; i++)
-                {
-                    lineSplit[i] = lineSplit[i + 1];
-                }
-                fileContent[2] = string.Join(" ", lineSplit);
-                File.WriteAllLines(filePath, fileContent);
-                File.AppendAllText(filePath, word);
+                File.WriteAllText(filePath, "Removed");
             }
+            else if (myText.Length < 1)
+            {
+                Console.WriteLine("The file is empty!");
+            }
+            // I will remove one word, Hanaa told us to choose anyword
+            // and just remove it.
             else
             {
-                Console.WriteLine("The word does not exist.");
+                // In case the word we want to remove does not exist.
+                string[] newText = new string[myText.Length];
+                // I want to remove the last word, then overwrite 
+                // the file content.
+                for (int i = 0; i < myText.Length; i++)
+                {
+                    if(myText[i] == "Osama")
+                    {
+                        newText[i] = "Removed";
+                        continue;
+                    }
+                    newText[i] = myText[i];
+                }
+
+                File.WriteAllLines(filePath, newText);
             }
         }
 
@@ -219,31 +230,41 @@ namespace Review_Challenges
             return outputArr;
         }
 
-        static void Main(string[] args)
+        public static string GetNumbers()
         {
             Console.Write("Please enter numbers: ");
             string userInput = Console.ReadLine();
-            ProductOfThree(userInput); 
+            return userInput;
+        }
+
+        public static string GetSentence()
+        {
+            Console.Write("Please enter a sentence: ");
+            string userInput = Console.ReadLine();
+            return userInput;
+        }
+
+        static void Main(string[] args)
+        {
+            int[] arr = {1, 2, 3, 5, 4, 3, 1, 2, 3, 1, 2, 3, 6, 77, 10, 45 };
+
+            //ProductOfThree(GetNumbers()); 
 
             //NumbersAverage(GetArray());
 
             //PrintPattren();
 
-            //int[] arr = {1, 2, 3, 5, 4, 3, 1, 2, 3, 1, 2 };
             //Console.WriteLine(MostFrequentNum(arr));
 
-            //int[] arr = { 1, 3, 6, 77, 10, 45, 3 };
             //Console.WriteLine(MaxNumber(arr)); 
 
             //WriteToWords();
 
             //ReadFromWords();
 
-            //RemoveWord();
+            RemoveWord();
 
-            //Console.Write("Please enter a sentence: ");
-            //string input = Console.ReadLine();
-            //ArrCharCounter(input);
+            //ArrCharCounter(GetSentence());
         }
     }
 }
