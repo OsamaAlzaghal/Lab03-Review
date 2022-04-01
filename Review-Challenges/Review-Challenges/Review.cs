@@ -187,23 +187,24 @@ namespace Review_Challenges
         {
             String filePath = "words.txt";
             string[] myText = File.ReadAllLines(filePath);
-            // If I have one word or less, it will be empty.
+            // If I have one word that equals my word ("Osama"), it will be removed and replaced with "Removed".
             if (myText.Length == 1 && myText[0] == "Osama")
             {
                 File.WriteAllText(filePath, "Removed");
             }
+            // If the file was empty.
             else if (myText.Length < 1)
             {
                 Console.WriteLine("The file is empty!");
             }
-            // I will remove one word, Hanaa told us to choose anyword
-            // and just remove it.
+            // I will remove all the occurrences of a specific word, Hanaa told us to choose any word
+            // and just remove it, but I wanted to show that it is being removed.
+            // I could just remove the white spaces but I prefer the other way since I did what was asked.
             else
             {
-                // In case the word we want to remove does not exist.
                 string[] newText = new string[myText.Length];
-                // I want to remove the last word, then overwrite 
-                // the file content.
+                // I want to remove all words that equal "Osama", then overwrite 
+                // the file content by showing that I removed them using "Removed" word.
                 for (int i = 0; i < myText.Length; i++)
                 {
                     if(myText[i] == "Osama")
@@ -211,6 +212,7 @@ namespace Review_Challenges
                         newText[i] = "Removed";
                         continue;
                     }
+                    // To write the other words to my file.
                     newText[i] = myText[i];
                 }
 
